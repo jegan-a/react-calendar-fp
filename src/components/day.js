@@ -11,6 +11,9 @@ const day = ({date,selected, disabled, onClick}) => {
     if (selected) {
         classNameList.push('selected-day');
     }
+    if (disabled) {
+        classNameList.push('disabled-day');
+    }
     const classNames = classNameList.join(' ');
 
     const handleClick = ()=> onClick(date);
