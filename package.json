@@ -6,7 +6,9 @@
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.config.js",
     "build": "webpack --config webpack.prod.js --mode production",
-    "test": "jest --watchAll --coverage --config=jest.json"
+    "test": "jest --watchAll --coverage --config=jest.json",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "react": "^16.13.1",
@@ -17,6 +19,10 @@
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
     "@babel/preset-typescript": "^7.10.4",
+    "@storybook/addon-actions": "^6.0.21",
+    "@storybook/addon-essentials": "^6.0.21",
+    "@storybook/addon-links": "^6.0.21",
+    "@storybook/react": "^6.0.21",
     "@types/enzyme": "^3.10.6",
     "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/react": "^16.9.49",
