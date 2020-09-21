@@ -6,12 +6,12 @@ export interface IDay {
     date: Date,
     isSelected:boolean,
     isDisabled:boolean,
-    handleClick:React.MouseEvent<HTMLDivElement>
+    onClick:(date:Date)=>void
 }
 
 
 
-const Day = ({ date, isSelected, isDisabled, handleClick } :IDay ) => {
+const Day = ({ date, isSelected, isDisabled, onClick } :IDay ) => {
     const classNameList = ["day"];
 
     if (isSelected) {
@@ -22,8 +22,13 @@ const Day = ({ date, isSelected, isDisabled, handleClick } :IDay ) => {
     }
     const classNames = classNameList.join(" ");
 
+    const handleClick =() => {
+
+        onClick(date);
+    }
+
     return (
-        <div className={classNames} onClick={()=>handleClick}>
+        <div className={classNames} onClick={handleClick}>
             {getDate(date)}
         </div>
     );

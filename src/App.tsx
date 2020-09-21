@@ -1,5 +1,5 @@
 import * as React from "react";
-import Day, {IDay} from './components/Day';
+import Day, {IDay} from './components/calendar/Day';
 import './App.scss'
 export interface HelloWorldProps {
   userName: string;
