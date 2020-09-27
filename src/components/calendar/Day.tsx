@@ -3,6 +3,7 @@ import { getDate } from "date-fns";
 import "./day.scss";
 
 export interface IDay {
+    label:string,
     date: Date,
     isSelected:boolean,
     isDisabled:boolean,
@@ -23,7 +24,6 @@ const Day = ({ date, isSelected, isDisabled, onClick } :IDay ) => {
     const classNames = classNameList.join(" ");
 
     const handleClick =() => {
-
         onClick(date);
     }
 

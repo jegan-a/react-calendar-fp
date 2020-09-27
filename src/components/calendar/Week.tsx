@@ -1,56 +1,52 @@
 import React, { useState } from 'react';
 import Day from './Day';
-import { generateWeekDays } from '../../utilities/dateUtility';
-import addDays from 'date-fns/addDays';
+import {IMonth} from './Month';
+
+import { generateWeekDays,getUniqeKeyFromDate } from '../../utilities/dateUtility';
+import isSameDay from 'date-fns/isSameDay';
+import isAfter from 'date-fns/isAfter';
+import isBefore from 'date-fns/isBefore';
+
 import './Week.scss'
 
+//Todo Intl.DateTimeFormat()
 
-export interface IWeek {
+export interface IWeek extends IMonth {
     weekStartDate: Date,
-    isSelected: boolean,
-    weekRender :() => {}
-    onWeekClick:(startDate:Date,endDate:Date)=>void
+    weekRender?: () => {}
 }
 
-const Week = ({
+const Week: React.FunctionComponent<IWeek> = ({
     weekStartDate,
-    isSelected,
-    onWeekClick,
-    weekRender
-}: IWeek
+    weekRender,
+    ...OtherProps
+}
 ) => {
-
-
-
-    const onClick = () => {
-        onWeekClick(weekStartDate,addDays(weekStartDate,6));
-    };
-
-    const weekHoverclass = onWeekClick ? 'week-hover' : '';
-    const selectedclassName = isSelectedWeek ? ['selected'] : '';
-    const finalClassName = `week ${weekHoverclass} ${selectedclassName}`;
-
     const weekDays = generateWeekDays(weekStartDate);
+    const {selectedDate,month,year,showFullWeek,maxDate,minDate,onDayClick} =OtherProps;
+
     const dayList = weekDays.map(currentDate => {
-        const shortDayName = currentDate.format('dd');
-        const isSelected = selectedDate && selectedDate.isSame(currentDate, 'day');
-        const isWeekEnd = isWeekEndShadow && (shortDayName === 'Sa' || shortDayName === 'Su');
+        const label = currentDate.getDate();
+        const isSelected = selectedDate && isSameDay(selectedDate,currentDate);
         const isDisabled =
-            (showOutRange && currentDate.month() !== month) ||
-            (moment.isMoment(maxDate) && currentDate.isAfter(maxDate)) ||
-            (moment.isMoment(minDate) && currentDate.isBefore(minDate));
-        const showDay = !showOutRange && currentDate.month() !== month ? undefined : currentDate.clone();
-        const data = {
+            (showFullWeek && currentDate.getMonth()+1 !== month) ||
+            (maxDate && isAfter(currentDate,maxDate)) ||
+            (minDate && isBefore(currentDate,minDate));
+
+        const isShowDate = showFullWeek && currentDate.getMonth()+1 !== month;
+        const dayProps = {
+            label:label,
             isSelected: isSelected,
-            isWeekEnd: isWeekEnd,
             isDisabled: isDisabled,
-            date: showDay,
+            date: currentDate,
+            isShowDate:isShowDate,
             onClick: onDayClick
         };
-        return <Day key={`${currentDate.getDate()}${currentDate.getMonth()}${currentDate.getFullYear()}`} {...data} />;
+        return <Day key={getUniqeKeyFromDate(currentDate)} {...dayProps} />;
     });
 
 
-    <div className={finalClassName}>{dayList}</div>;
+    return <div className={''}>{dayList}</div>;
 
 }
+export default Week;
