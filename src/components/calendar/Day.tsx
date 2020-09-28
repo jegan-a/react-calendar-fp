@@ -1,9 +1,8 @@
 import React from "react";
 import { getDate } from "date-fns";
-import "./day.scss";
-
+import DayRender from '../../defaultTemplate/DayRender'
 export interface IDay {
-    label:string,
+    label:number,
     date: Date,
     isSelected:boolean,
     isDisabled:boolean,
@@ -21,16 +20,19 @@ const Day = ({ date, isSelected, isDisabled, onClick } :IDay ) => {
     if (isDisabled) {
         classNameList.push("disabled-day");
     }
-    const classNames = classNameList.join(" ");
+
+    const dayObject ={
+        isSelected,
+        isDisabled,
+        label:date.getDate()
+    }
 
     const handleClick =() => {
         onClick(date);
     }
 
-    return (
-        <div className={classNames} onClick={handleClick}>
-            {getDate(date)}
-        </div>
-    );
+    return DayRender(date,dayObject,handleClick);
+       
+
 };
 export default Day;

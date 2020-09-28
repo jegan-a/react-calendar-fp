@@ -7,7 +7,7 @@ import isSameDay from 'date-fns/isSameDay';
 import isAfter from 'date-fns/isAfter';
 import isBefore from 'date-fns/isBefore';
 
-import './Week.scss'
+import './week.scss'
 
 //Todo Intl.DateTimeFormat()
 
@@ -27,7 +27,7 @@ const Week: React.FunctionComponent<IWeek> = ({
 
     const dayList = weekDays.map(currentDate => {
         const label = currentDate.getDate();
-        const isSelected = selectedDate && isSameDay(selectedDate,currentDate);
+        const isSelected = selectedDate && isSameDay(selectedDate,currentDate)
         const isDisabled =
             (showFullWeek && currentDate.getMonth()+1 !== month) ||
             (maxDate && isAfter(currentDate,maxDate)) ||
@@ -36,13 +36,13 @@ const Week: React.FunctionComponent<IWeek> = ({
         const isShowDate = showFullWeek && currentDate.getMonth()+1 !== month;
         const dayProps = {
             label:label,
-            isSelected: isSelected,
-            isDisabled: isDisabled,
+            isSelected: Boolean(isSelected),
+            isDisabled: Boolean(isDisabled),
             date: currentDate,
-            isShowDate:isShowDate,
+            isShowDate:Boolean(isShowDate),
             onClick: onDayClick
         };
-        return <Day key={getUniqeKeyFromDate(currentDate)} {...dayProps} />;
+        return <Day key={getUniqeKeyFromDate(currentDate)} {...dayProps} {...OtherProps} />;
     });
 
 

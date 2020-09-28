@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Week from './Week';
 import { generateWeeksOfMonth ,getUniqeKeyFromDate } from '../../utilities/dateUtility';
-import './Month.scss';
+import './month.scss';
 
 export interface IMonth {
     minDate?: Date,
@@ -9,15 +9,14 @@ export interface IMonth {
     selectedDate?:Date,
     month:number,
     year:number,
+    showFullWeek:boolean,
     onDayClick:()=>void,
-    showFullWeek:boolean
 }
 
 const Month: React.FunctionComponent<IMonth> = ({
     month,
     year,
-    onDayClick,
-    showFullWeek = true,
+    showFullWeek=false,
     ...otherPros
 }) => {
     const startDate = new Date(year, month - 1);
@@ -27,8 +26,10 @@ const Month: React.FunctionComponent<IMonth> = ({
         weekStartDate={weekStartDate}
         month={month}
         year={year}
+        showFullWeek={showFullWeek}
         {...otherPros}
     />)
     return <div className="month">{weekList}</div>;
-
 }
+
+export default Month;
