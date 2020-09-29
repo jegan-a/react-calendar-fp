@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
 import Day from './Day';
-import {IMonth} from './Month';
+import { IMonth } from './Month';
+import weekRenderDefault from '../../defaultTemplate/WeekRender';
+import { generateWeekDays, getUniqeKeyFromDate } from '../../utilities/dateUtility';
 
-import { generateWeekDays,getUniqeKeyFromDate } from '../../utilities/dateUtility';
-import isSameDay from 'date-fns/isSameDay';
-import isAfter from 'date-fns/isAfter';
-import isBefore from 'date-fns/isBefore';
-
-import './week.scss'
 
 //Todo Intl.DateTimeFormat()
 
 export interface IWeek extends IMonth {
     weekStartDate: Date,
-    weekRender?: () => {}
+    weekRender?: (weekStartDate: Date, weekData: JSX.Element[]) => React.ReactNode
 }
 
 const Week: React.FunctionComponent<IWeek> = ({
@@ -23,30 +19,13 @@ const Week: React.FunctionComponent<IWeek> = ({
 }
 ) => {
     const weekDays = generateWeekDays(weekStartDate);
-    const {selectedDate,month,year,showFullWeek,maxDate,minDate,onDayClick} =OtherProps;
 
     const dayList = weekDays.map(currentDate => {
-        const label = currentDate.getDate();
-        const isSelected = selectedDate && isSameDay(selectedDate,currentDate)
-        const isDisabled =
-            (showFullWeek && currentDate.getMonth()+1 !== month) ||
-            (maxDate && isAfter(currentDate,maxDate)) ||
-            (minDate && isBefore(currentDate,minDate));
-
-        const isShowDate = showFullWeek && currentDate.getMonth()+1 !== month;
-        const dayProps = {
-            label:label,
-            isSelected: Boolean(isSelected),
-            isDisabled: Boolean(isDisabled),
-            date: currentDate,
-            isShowDate:Boolean(isShowDate),
-            onClick: onDayClick
-        };
-        return <Day key={getUniqeKeyFromDate(currentDate)} {...dayProps} {...OtherProps} />;
+        return <Day date={currentDate} key={getUniqeKeyFromDate(currentDate)} {...OtherProps} />;
     });
 
-
-    return <div className={''}>{dayList}</div>;
+    const result = weekRender?  weekRender(weekStartDate, dayList) : dayList;
+    return result;
 
 }
 export default Week;

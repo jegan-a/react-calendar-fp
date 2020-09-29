@@ -5,7 +5,7 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import Month from '../components/calendar/Month';
 
 export default {
-    title: 'Component/Day',
+    title: 'Component/Month',
     component: Month,
     argTypes: {
         backgroundColor: { control: 'color' },

@@ -10,7 +10,7 @@ export interface IMonth {
     month:number,
     year:number,
     showFullWeek:boolean,
-    onDayClick:()=>void,
+    onDayClick:(date:Date)=>void,
 }
 
 const Month: React.FunctionComponent<IMonth> = ({
