@@ -3,6 +3,8 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 
 import Month from '../components/calendar/Month';
+import {plugin} from '../plugins/plugin';
+import {disableDateBetween} from '../plugins/disableDate';
 
 export default {
     title: 'Component/Month',
@@ -15,6 +17,10 @@ export default {
 
 export const Primary = () => {
     const date = new Date();
-    return <Month selectedDate={date} onDayClick={()=>{}} showFullWeek={true} month={1} year={2020} />
+
+
+    const disableDateBetween(new Date(2020,3,1),new Date(2020,3,1));
+    
+    return <Month selectedDate={date} onDayClick={()=>{}} showFullWeek={true} month={2} year={2020} />
 }
 

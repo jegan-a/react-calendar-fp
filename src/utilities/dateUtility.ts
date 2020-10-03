@@ -18,7 +18,7 @@ export const generateWeekDays = (startDate: Date, dateList: Date[] = []): Date[]
 
 export const generateWeeksOfMonth = (month: number, year: number, weekStartList: Date[] = []): Date[] => {
     const monthStartDate = startOfMonth(new Date(year,month));
-    const startDateOfWeek = weekStartList.length === 0 ?  startOfWeek(monthStartDate) : addDays(weekStartList[weekStartList.length - 1],6);
+    const startDateOfWeek = weekStartList.length === 0 ?  startOfWeek(monthStartDate) : addDays(weekStartList[weekStartList.length - 1],7);
     const monthEndDate = endOfMonth(monthStartDate);
     if (isAfter(startDateOfWeek,monthEndDate)) {
         return weekStartList;

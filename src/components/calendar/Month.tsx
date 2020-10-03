@@ -20,16 +20,27 @@ const Month: React.FunctionComponent<IMonth> = ({
     ...otherPros
 }) => {
     const startDate = new Date(year, month - 1);
-    const weeks = generateWeeksOfMonth(month, year);
+    const weeks = generateWeeksOfMonth(startDate.getMonth(), startDate.getFullYear());
+    console.log(weeks);
     const weekList = weeks.map(weekStartDate => <Week
-        key={getUniqeKeyFromDate(startDate)}
+        key={getUniqeKeyFromDate(weekStartDate)}
         weekStartDate={weekStartDate}
         month={month}
         year={year}
         showFullWeek={showFullWeek}
         {...otherPros}
     />)
-    return <div className="month">{weekList}</div>;
+    return <div className="month">
+        <div>Sun</div>
+        <div>Mon</div>
+        <div>Tues</div>
+        <div>Wed</div>
+        <div>Thus</div>
+        <div>Fri</div>
+        <div>Sat</div>
+        {weekList}
+        
+        </div>;
 }
 
 export default Month;
