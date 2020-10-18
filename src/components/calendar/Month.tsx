@@ -3,6 +3,7 @@ import Week from './Week';
 import { generateWeeksOfMonth ,getUniqeKeyFromDate } from '../../utilities/dateUtility';
 import './month.scss';
 
+
 export interface IMonth {
     minDate?: Date,
     maxDate?: Date,
@@ -10,6 +11,9 @@ export interface IMonth {
     month:number,
     year:number,
     showFullWeek:boolean,
+    datePlugins:{
+        [key:string]:(date:Date)=>void
+    }
     onDayClick:(date:Date)=>void,
 }
 
@@ -21,7 +25,6 @@ const Month: React.FunctionComponent<IMonth> = ({
 }) => {
     const startDate = new Date(year, month - 1);
     const weeks = generateWeeksOfMonth(startDate.getMonth(), startDate.getFullYear());
-    console.log(weeks);
     const weekList = weeks.map(weekStartDate => <Week
         key={getUniqeKeyFromDate(weekStartDate)}
         weekStartDate={weekStartDate}

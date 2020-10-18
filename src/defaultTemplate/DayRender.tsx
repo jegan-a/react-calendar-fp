@@ -3,17 +3,28 @@ import './day.scss';
 
 export interface dateObject  {
         label:number,
-        isSelected:boolean,
-        isDisabled:boolean
+        isSelected?:boolean,
+        isDisabled?:boolean
 }
 
 export interface IDayRender {
-        (date:Date,dateObject:dateObject,handleClick:(date:Date)=>void):JSX.Element
+        date:Date,
+        dateObject:dateObject,
+        handleClick:(date:Date)=>void
 }
 
-const dayRender : IDayRender  = (date,dayObject,handleClick) =>{
+const dayRender : React.FC<IDayRender>  = ({ date,dateObject,handleClick}) =>{
+        console.log('dateObject');
+        console.log(dateObject);
+        const classNames = {
+                'day':true
+        }
+        const isSelected = dateObject && dateObject.isSelected;
+
+       
+
  return <div className="day" onClick={()=>handleClick(date)}>
-           {dayObject.label}
+           {dateObject.label}
         </div>
 
 }

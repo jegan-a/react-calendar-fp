@@ -12,7 +12,7 @@ export interface IDay extends IMonth {
 
 
 
-const Day = ({ date, onDayClick, ...otherPros } :IDay ) => {
+const Day = ({ date,datePlugins,onDayClick, ...otherPros } :IDay ) => {
 
     const {month,year,showFullWeek,maxDate,minDate,selectedDate}= otherPros
 
@@ -42,13 +42,23 @@ const Day = ({ date, onDayClick, ...otherPros } :IDay ) => {
         classNameList.push("disabled-day");
     }
 
+    let templateVar={};
+    if(datePlugins){
+
+        for ( const datePlugin in datePlugins ){
+            const fn = datePlugins[datePlugin];
+            templateVar[datePlugin]=fn(date);
+        }
+
+    }
+
 
 
     const handleClick =() => {
         onDayClick(date);
     }
 
-    return DayRender(date,dayProps,handleClick);
+    return( <DayRender date={date} dateObject={{...dayProps,...templateVar}} handleClick={handleClick} /> )
        
 
 };
