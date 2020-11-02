@@ -34,13 +34,13 @@ const Month: React.FunctionComponent<IMonth> = ({
         {...otherPros}
     />)
     return <div className="month">
-        <div>Sun</div>
-        <div>Mon</div>
-        <div>Tues</div>
-        <div>Wed</div>
-        <div>Thus</div>
-        <div>Fri</div>
-        <div>Sat</div>
+        <div className="weekday">Sun</div>
+        <div className="weekday">Mon</div>
+        <div className="weekday">Tues</div>
+        <div className="weekday">Wed</div>
+        <div className="weekday">Thus</div>
+        <div className="weekday">Fri</div>
+        <div className="weekday">Sat</div>
         {weekList}
         
         </div>;

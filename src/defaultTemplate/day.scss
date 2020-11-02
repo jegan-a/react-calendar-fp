@@ -1,11 +1,30 @@
 .month{
 display: grid;
+min-width: 300PX;
 grid-template-columns: repeat(7, 1fr);
-grid-gap: 10px;
+grid-gap: 1px 1px;
+justify-content: center;
+align-items: center;
+font-family: Verdana,sans-serif;
+& > div{
+    background-color: rosybrown;
+}
+
+}
+.weekday{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 .day {
-
+    min-width: 5px;
+    min-height: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:1px solid red;
     &:hover {
         cursor: pointer;
     }

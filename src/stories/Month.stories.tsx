@@ -8,13 +8,14 @@ import {selectedDate} from '../plugins/selectedDate';
 
 export default {
     title: 'Component/Month',
+    layout: 'centered',
     component: Month,
     argTypes: { onDayClick: { action: 'onDayClick' } },
 
 } as Meta;
 
 
-const MonthTemplate: Story<IMonth> = (args) => <Month {...args} />;
+const MonthTemplate: Story<IMonth> = (args) => <div style={{width:'300px'}}><Month {...args} /></div>;
 
 
 export const Primary = MonthTemplate.bind({});

@@ -1,6 +1,7 @@
 import * as React from "react";
 import Day, {IDay} from './components/calendar/Day';
 import './App.scss'
+import DatePicker from '../src/compose/DatePicker'
 export interface HelloWorldProps {
   userName: string;
   lang: string;
@@ -8,10 +9,7 @@ export interface HelloWorldProps {
 export const App = (props: HelloWorldProps) => (
   <div className="App">
   <h1>
-    Hi {props.userName} from React! Welcome to {props.lang}!
-
-    <Day date={new Date()} isSelected={true} isDisabled={false} handleClick={()=>{}}  />
-
+    <DatePicker date={new Date()} />
   </h1>
   </div>
 );
