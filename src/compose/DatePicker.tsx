@@ -1,19 +1,34 @@
 import React, {useState} from 'react';
 import Month, {IMonth} from '../components/calendar/Month'
 
-type 
+
+interface Picker{
+    initialMonth?:Date,
+    selectedDays? : Date[] | Date 
+
+}
+
+type DatePicker =  IMonth & Picker;
 
 
-const DatePicker:React.FC<IMonth> = ({initialMonth =new Date() }) =>{
+const DatePicker:React.FC<DatePicker> = ({initialMonth =new Date(), selectedDays }) =>{
 
-    const [viewMonth,setViewMonth] =useState(initialMonth.get)
+    const [viewMonth,setViewMonth] =useState(initialMonth.getMonth()+1)
+    const [viewYear,setViewYear] =useState(initialMonth.getMonth()+1)
+    const [selectedDate,setSelectedDate]=useState([]);
 
+    const onDayClick = (date:Date) => {
+
+
+
+    } 
 
 
     return (
         <Month 
-        month={month}
-        year={year}
+        month={viewMonth}
+        year={viewYear}
+        onDayClick={onDayClick}
         />
 
     )

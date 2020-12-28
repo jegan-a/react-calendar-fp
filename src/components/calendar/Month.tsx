@@ -10,8 +10,8 @@ export interface IMonth {
     selectedDate?:Date,
     month:number,
     year:number,
-    showFullWeek:boolean,
-    datePlugins:{
+    showFullWeek?:boolean,
+    datePlugins?:{
         [key:string]:(date:Date)=>void
     }
     onDayClick:(date:Date)=>void,

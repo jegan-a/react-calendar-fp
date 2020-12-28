@@ -6,10 +6,9 @@ export interface HelloWorldProps {
   userName: string;
   lang: string;
 }
-export const App = (props: HelloWorldProps) => (
+export const App = () => (
   <div className="App">
-  <h1>
+  
     <DatePicker date={new Date()} />
-  </h1>
   </div>
 );
